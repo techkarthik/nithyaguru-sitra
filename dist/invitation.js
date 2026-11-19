@@ -1,6 +1,5 @@
 const music = document.querySelector("#invitation-music");
 const musicToggle = document.querySelector(".music-toggle");
-const openInvitation = document.querySelector(".cover-button");
 
 function playMusic() {
   music.play().catch(updateMusicToggle);
@@ -12,15 +11,18 @@ function updateMusicToggle() {
 
 if (music.hasAttribute("src")) {
   musicToggle.hidden = false;
-  music.addEventListener("play", updateMusicToggle);
+  music.addEventListener("play", () => {
+    document.removeEventListener("click", playMusic);
+    updateMusicToggle();
+  });
   music.addEventListener("pause", updateMusicToggle);
   music.addEventListener("error", () => {
     musicToggle.hidden = true;
-    openInvitation.removeEventListener("click", playMusic);
+    document.removeEventListener("click", playMusic);
   });
-  openInvitation.addEventListener("click", playMusic, { once: true });
+  document.addEventListener("click", playMusic, { once: true });
   musicToggle.addEventListener("click", () => {
-    openInvitation.removeEventListener("click", playMusic);
+    document.removeEventListener("click", playMusic);
     if (music.paused) {
       playMusic();
     } else {
