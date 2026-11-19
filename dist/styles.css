@@ -39,6 +39,23 @@ h2 { font-size: clamp(2.65rem, 5.5vw, 4.55rem); }
 .monogram { font: 700 1.8rem/1 var(--display); }
 .monogram span { padding-inline: .12em; color: var(--gold); font-style: italic; }
 
+.music-toggle {
+  position: fixed;
+  z-index: 2;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
+  min-height: 44px;
+  padding: .5rem 1rem;
+  border: 1px solid var(--gold);
+  border-radius: 2rem;
+  background: var(--wine);
+  color: var(--cream);
+  font: 700 .875rem/1.25 Georgia, serif;
+  cursor: pointer;
+}
+.music-toggle:hover { background: #68263e; }
+.music-toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
 .cover {
   min-height: min(680px, calc(100svh - 60px));
   display: grid;

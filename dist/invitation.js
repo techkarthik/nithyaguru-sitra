@@ -1,3 +1,35 @@
+const music = document.querySelector("#invitation-music");
+const musicToggle = document.querySelector(".music-toggle");
+const openInvitation = document.querySelector(".cover-button");
+
+function playMusic() {
+  music.play().catch(updateMusicToggle);
+}
+
+function updateMusicToggle() {
+  musicToggle.textContent = music.paused ? "Play music" : "Mute music";
+}
+
+if (music.hasAttribute("src")) {
+  musicToggle.hidden = false;
+  music.addEventListener("play", updateMusicToggle);
+  music.addEventListener("pause", updateMusicToggle);
+  music.addEventListener("error", () => {
+    musicToggle.hidden = true;
+    openInvitation.removeEventListener("click", playMusic);
+  });
+  openInvitation.addEventListener("click", playMusic, { once: true });
+  musicToggle.addEventListener("click", () => {
+    openInvitation.removeEventListener("click", playMusic);
+    if (music.paused) {
+      playMusic();
+    } else {
+      music.pause();
+    }
+  });
+  playMusic();
+}
+
 const guestName = new URLSearchParams(location.search).get("name")?.trim();
 
 if (guestName) {
