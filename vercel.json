@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "node build-vercel.mjs",
+  "outputDirectory": "build",
+  "headers": [
+    {
+      "source": "/wedding.ics",
+      "headers": [
+        { "key": "Content-Type", "value": "text/calendar; charset=utf-8" }
+      ]
+    }
+  ]
+}
